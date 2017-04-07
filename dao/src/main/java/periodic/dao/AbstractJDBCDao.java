@@ -1,7 +1,7 @@
 package periodic.dao;
 
-public interface AbstractDaoFactory {
+public abstract class AbstractJDBCDao{
 
     //Connection getConnection()
-    }
+
 }

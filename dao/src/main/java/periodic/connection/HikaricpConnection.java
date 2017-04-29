@@ -1,13 +1,13 @@
 package periodic.connection;
 
-import com.zaxxer.hikari.HikariConfig;
+/*import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.sql.Connection;
-import java.sql.SQLException;
+import java.sql.SQLException;*/
 
 public class HikaricpConnection {
-    //Logger
+  /*  //Logger
     private static HikaricpConnection instance;
     private static Connection connection;
     private static final String FILE_PROPERTIES = "hikariMySQL.properties";
@@ -30,5 +30,5 @@ public class HikaricpConnection {
             e.printStackTrace();
         }
         return connection;
-    }
+    }*/
 }

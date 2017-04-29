@@ -1,14 +1,17 @@
 package periodic;
 
+import periodic.connection.ConnectionPool;
 
-import periodic.connection.HikaricpConnection;
+import java.sql.SQLException;
 
 public class Main {
-    static HikaricpConnection hc;
 
+    public static void main(String[] args) throws SQLException {
 
-    public static void main(String[] args) {
-        hc = HikaricpConnection.getInstance();
+        ConnectionPool cp = ConnectionPool.getInstance();
+
+        cp.getConnection();
+
 
     }
 }

@@ -15,7 +15,7 @@ import java.util.List;
 public interface GenericDao<T extends Identified<PK>, PK extends Serializable> {
 
     /**Создает новую запись и соответствующий ей объект*/
-    public T create() throws SQLException;
+    public T create() throws PersistException;
 
     /**Создает новую запись соответствующую объекту object*/
     public T persist(T object) throws PersistException;

@@ -2,13 +2,14 @@ package periodic.entities;
 
 import periodic.dao.Identified;
 
-import java.util.Date;
+
+import java.sql.Date;
 import java.util.List;
 
 public class Order implements Identified<Integer>{
 
     private Integer id;
-    private User user;
+    private Integer idUser;
     private List<Book> bookList;
     private boolean state;
     private Date orderDate;
@@ -16,11 +17,11 @@ public class Order implements Identified<Integer>{
     public Order() {
     }
 
-    public Order(Integer id, Integer idClient,
+    public Order(Integer id, Integer idUser,
                  List<Book> bookList, boolean state,
                  Date dateOfOrder) {
         this.id = id;
-        this.user = user;
+        this.idUser = idUser;
         this.bookList = bookList;
         this.state = state;
         this.orderDate = dateOfOrder;
@@ -34,12 +35,12 @@ public class Order implements Identified<Integer>{
         this.id = id;
     }
 
-    public User getUser() {
-        return user;
+    public Integer getIdUser() {
+        return idUser;
     }
 
-    public void setUser(User user) {
-        this.user= user;
+    public void setIdUser(Integer idUser) {
+        this.idUser= idUser;
     }
 
     public List<Book> getBookList() {

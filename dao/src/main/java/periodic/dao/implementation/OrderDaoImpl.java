@@ -50,7 +50,7 @@ public class OrderDaoImpl extends AbstractJDBCDao<Order,Integer> {
             while (resultSet.next()){
                 Order order = new Order();
                 order.setId(resultSet.getInt("id_order"));
-                //order.setUser(user.getresultSet.getInt("user_order"));
+                order.setIdUser(resultSet.getInt("user_order"));
                 order.setState(resultSet.getBoolean("state_order"));
                 order.setOrderDate(resultSet.getDate("date_order"));
                 result.add(order);
@@ -64,13 +64,25 @@ public class OrderDaoImpl extends AbstractJDBCDao<Order,Integer> {
     @Override
     public void preparedStatementForInsert(PreparedStatement preparedStatement, Order object) throws PersistException {
         try{
-            preparedStatement.
+            preparedStatement.setInt(1, object.getId());
+            preparedStatement.setInt(2, object.getIdUser());
+            preparedStatement.setBoolean(3, object.isState());
+            preparedStatement.setDate(4, object.getOrderDate());
+        }
+        catch (Exception e){
+            throw new PersistException(e);
         }
     }
 
     @Override
     public void preparedStatementForUpdate(PreparedStatement preparedStatement, Order object) throws PersistException {
-
+        try {
+            preparedStatement.setBoolean(1, object.isState());
+            preparedStatement.setInt(2, object.getId());
+        }
+        catch (Exception e) {
+            throw new PersistException(e);
+        }
     }
 
     public OrderDaoImpl(Connection connection){

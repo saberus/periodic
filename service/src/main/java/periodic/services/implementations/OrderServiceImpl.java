@@ -97,4 +97,18 @@ public class OrderServiceImpl extends AbstractService<Order, Long> {
         }
         return orders;
     }
+
+    public int getOrderCount() throws ServiceException {
+        int orderCount;
+        try {
+            session = util.getSession();
+            transaction = session.beginTransaction();
+            orderCount = orderDao.getOrdersCount();
+            transaction.commit();
+        }
+        catch (PersistException e){
+            throw new ServiceException("", e);
+        }
+        return orderCount;
+    }
 }

@@ -96,4 +96,36 @@ public class BookServiceImpl extends AbstractService<Book, Long> {
         }
         return books;
     }
+
+    public List<Book> getBooksByPage(int pageNumber, int pageCapacity) throws ServiceException{
+        List<Book> books;
+        try {
+            session = util.getSession();
+            transaction = session.beginTransaction();
+            int offset = pageCapacity * pageNumber - pageCapacity;
+            books = bookDao.getBooksByPage(offset, pageCapacity);
+            transaction.commit();
+        }
+        catch (PersistException e){
+            throw new ServiceException("", e);
+        }
+        return books;
+    }
+
+    public List<Book> getBooksByGenre(String genre)throws ServiceException{
+        List<Book> books;
+        try {
+            session = util.getSession();
+            transaction = session.beginTransaction();
+            books = bookDao.getBooksByGenre(genre);
+            transaction.commit();
+        }
+        catch (PersistException e){
+            throw new ServiceException("", e);
+        }
+        if (books.size()== 0){
+            //TODO
+        }
+        return books;
+    }
 }

@@ -3,6 +3,8 @@ package periodic.dao.implementations;
 import periodic.dao.AbstractDao;
 import periodic.entities.Genre;
 
+import java.util.List;
+
 public class GenreDaoImpl extends AbstractDao<Genre,Long> {
 
     private static volatile GenreDaoImpl instance;

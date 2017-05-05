@@ -97,4 +97,19 @@ public class UserServiceImpl extends AbstractService<User, Long>{
         }
         return users;
     }
+
+    public User getByLoginAndPassword(String login, String password) throws ServiceException{
+        User user;
+        try {
+         session = util.getSession();
+         transaction = session.beginTransaction();
+         user = userDao.getUserByLoginAndPassword(login, password);
+         transaction.commit();
+     }
+     catch (PersistException e){
+         transaction.rollback();
+         throw new ServiceException("", e);
+     }
+     return user;
+    }
 }

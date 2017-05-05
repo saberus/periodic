@@ -1,8 +1,14 @@
 package periodic.services.implementations;
 
+import periodic.dao.exceptions.PersistException;
 import periodic.dao.implementations.BookDaoImpl;
+import periodic.entities.Book;
+import periodic.exceptions.ServiceException;
+import periodic.services.AbstractService;
 
-public class BookServiceImpl {
+import java.util.List;
+
+public class BookServiceImpl extends AbstractService<Book, Long> {
 
     private static volatile BookServiceImpl instance;
     private BookDaoImpl bookDao = BookDaoImpl.getInstance();
@@ -18,5 +24,76 @@ public class BookServiceImpl {
             }
         }
         return instance;
+    }
+
+
+    public Long create(Book book) throws ServiceException {
+        Long id;
+        try {
+            session = util.getSession();
+            transaction = session.beginTransaction();
+            id = bookDao.create(book);
+            transaction.commit();
+        }
+        catch (PersistException e) {
+            transaction.rollback();
+            throw new ServiceException("", e);
+        }
+        return id;
+    }
+
+    public Book getByPK(int key) throws ServiceException {
+        Book book;
+        try {
+            session = util.getSession();
+            transaction = session.beginTransaction();
+            book = bookDao.getByPK(key);
+            transaction.commit();
+        }
+        catch (PersistException e){
+            transaction.rollback();
+            throw new ServiceException("", e);
+        }
+        return book;
+    }
+
+    public void update(Book book) throws ServiceException {
+        try {
+            session = util.getSession();
+            transaction = session.beginTransaction();
+            bookDao.update(book);
+            transaction.commit();
+        }
+        catch (PersistException e){
+            throw new ServiceException("", e);
+        }
+    }
+
+    public void delete(int key) throws ServiceException {
+        try {
+            session = util.getSession();
+            transaction = session.beginTransaction();
+            bookDao.delete(key);
+            transaction.commit();
+        }
+        catch (PersistException e){
+            throw new ServiceException("", e);
+        }
+
+    }
+
+    public List<Book> getAll() throws ServiceException {
+        List<Book> books;
+        try {
+            session = util.getSession();
+            transaction = session.beginTransaction();
+            books = bookDao.getAll();
+            transaction.commit();
+        }
+        catch (PersistException e){
+            transaction.rollback();
+            throw new ServiceException("", e);
+        }
+        return books;
     }
 }

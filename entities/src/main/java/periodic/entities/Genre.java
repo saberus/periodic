@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.sql.PreparedStatement;
 
 @Data
@@ -15,7 +16,7 @@ import java.sql.PreparedStatement;
 @Entity
 @Table(name = "genres")
 
-public class Genre {
+public class Genre implements Identified<Long>, Serializable {
 
     private static final long SERIAL_VARSION_UID = 1L;
 
@@ -25,4 +26,5 @@ public class Genre {
 
     @Column
     private String name;
+
 }

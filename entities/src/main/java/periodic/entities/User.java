@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Data
 @AllArgsConstructor
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @EqualsAndHashCode(callSuper = false)
 @Entity
 @Table(name = "users")
-public class User {
+public class User implements Identified<Long>, Serializable {
 
     private static final long SERIAL_VARSION_UID = 1L;
 
@@ -27,9 +28,10 @@ public class User {
     @Column(name = "user_password")
     private String password;
 
+    @Column(name = "user_email")
+    private String email;
+
     @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "role_id")
     private Role role;
-
-
 }

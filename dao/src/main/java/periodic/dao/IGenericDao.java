@@ -1,9 +1,9 @@
 package periodic.dao;
 
 import periodic.dao.exceptions.PersistException;
+import periodic.entities.Identified;
 
 import java.io.Serializable;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -12,13 +12,10 @@ import java.util.List;
  * @param<PK> тип первич
  */
 
-public interface GenericDao<T extends Identified<PK>, PK extends Serializable> {
-
-    /**Создает новую запись и соответствующий ей объект*/
-    public T create() throws PersistException;
+public interface IGenericDao<T extends Identified<PK>, PK extends Serializable> {
 
     /**Создает новую запись соответствующую объекту object*/
-    public T persist(T object) throws PersistException;
+    public Long create(T object) throws PersistException;
 
     /**Возвращает объект соответсвующий записи с первичным ключом или key или null*/
     public T getByPK(int key) throws PersistException;
@@ -27,7 +24,7 @@ public interface GenericDao<T extends Identified<PK>, PK extends Serializable> {
     public void update(T object) throws PersistException;
 
     /**Удаляет запись объекта из базы данных*/
-    public void delete(T object) throws PersistException;
+    public void delete(int key) throws PersistException;
 
     /**Возвращает Список объектов соответствующий всем записям в базе данных*/
     public List<T> getAll() throws PersistException;

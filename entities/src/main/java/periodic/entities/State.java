@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.NaturalIdCache;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -14,15 +13,17 @@ import java.io.Serializable;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = false)
 @Entity
-@Table(name = "roles")
-public class Role implements Identified<Long>, Serializable{
+@Table(name = "states")
+public class State implements Identified<Long>, Serializable{
 
     private static final long SERIAL_VERSION_UID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue
     private Long id;
 
-    @Column
-    private String name;
+    @Column(name = "name_state")
+    private String state;
+
+
 }
